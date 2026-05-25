@@ -745,7 +745,7 @@
   .quiz-section {
     position: relative; z-index: 5;
     max-width: 720px; margin: 0 auto;
-    padding: 60px 20px 380px;
+    padding: 60px 20px 60px;
   }
   .quiz-header {
     text-align: center; margin-bottom: 40px;
@@ -905,7 +905,75 @@
     .quiz-card { padding: 20px 16px; }
     .quiz-option { padding: 12px 14px; font-size: 15px; }
     .content { padding: 140px 16px 80px; }
-    .quiz-section { padding: 40px 16px 380px; }
+    .quiz-section { padding: 40px 16px 40px; }
+  }
+
+  /* ── SITE FOOTER ── */
+  .site-footer {
+    position: relative;
+    z-index: 5;
+    padding: 40px 20px 160px; /* bottom padding clears the Kaaba scene ground */
+    text-align: center;
+    width: 100%;
+    margin-top: 40px;
+    background: linear-gradient(to bottom, transparent, rgba(5, 14, 8, 0.9));
+  }
+  .footer-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .footer-line {
+    display: block;
+    height: 1px;
+    width: 80px;
+    background: linear-gradient(90deg, transparent, var(--gold-dark), transparent);
+  }
+  .footer-icon {
+    color: var(--gold);
+    font-size: 14px;
+    text-shadow: 0 0 10px rgba(201, 168, 76, 0.5);
+  }
+  .footer-text {
+    font-family: 'Amiri', serif;
+    font-size: clamp(15px, 2vw, 18px);
+    color: var(--cream);
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+  }
+  .footer-subtext {
+    font-family: 'Amiri', serif;
+    font-size: clamp(12px, 1.5vw, 14px);
+    color: rgba(240, 208, 128, 0.7);
+    letter-spacing: 0.5px;
+  }
+  .footer-link {
+    color: var(--gold-light);
+    text-decoration: none;
+    font-family: 'Cinzel Decorative', cursive;
+    font-weight: 700;
+    border-bottom: 1px dashed var(--gold);
+    transition: all 0.3s ease;
+    padding-bottom: 2px;
+  }
+  .footer-link:hover {
+    color: var(--gold);
+    border-bottom-style: solid;
+    text-shadow: 0 0 12px rgba(201, 168, 76, 0.8);
+  }
+  .footer-portfolio-link {
+    color: var(--gold-light);
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 1px dotted var(--gold-light);
+    transition: all 0.3s ease;
+  }
+  .footer-portfolio-link:hover {
+    color: var(--gold);
+    border-bottom-style: solid;
+    text-shadow: 0 0 8px rgba(240, 208, 128, 0.6);
   }
 
   /* ── AUDIO WIDGET ── */
@@ -1143,6 +1211,21 @@
   </div>
   <div id="quizContainer"></div>
 </div>
+
+<!-- ── SITE FOOTER ── -->
+<footer class="site-footer">
+  <div class="footer-divider">
+    <span class="footer-line"></span>
+    <span class="footer-icon">✦</span>
+    <span class="footer-line"></span>
+  </div>
+  <p class="footer-text">
+    Developed by <a href="portfolio.html" class="footer-link">MOHAMMED REHAN A</a>
+  </p>
+  <p class="footer-subtext">
+    Explore my professional work &amp; projects on my <a href="portfolio.html" class="footer-portfolio-link">Portfolio</a>
+  </p>
+</footer>
 
 <!-- Hajj Scene -->
 <div class="scene">
