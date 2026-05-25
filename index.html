@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eid ul Adha Mubarak</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel+Decorative:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #F0D080;
+    --gold-dark: #8B6914;
+    --deep-green: #0A2E1A;
+    --emerald: #1A5C38;
+    --emerald-light: #2E8B57;
+    --cream: #FDF6E3;
+    --sand: #E8C97A;
+    --night: #050E08;
+    --teal: #1A6B5A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--night);
+    font-family: 'Amiri', serif;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* ── STARRY SKY ── */
+  #sky {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, #0d2b1a 0%, #050E08 60%);
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .star {
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+    animation: twinkle var(--d) ease-in-out infinite alternate;
+    opacity: var(--op);
+  }
+
+  @keyframes twinkle {
+    from { opacity: var(--op); transform: scale(1); }
+    to   { opacity: calc(var(--op) * 0.3); transform: scale(0.7); }
+  }
+
+  /* ── CRESCENT MOON ── */
+  .moon-wrap {
+    position: fixed;
+    top: 40px; right: 80px;
+    z-index: 2;
+    animation: moonFloat 6s ease-in-out infinite;
+  }
+  @keyframes moonFloat {
+    0%,100%{ transform: translateY(0); }
+    50%    { transform: translateY(-12px); }
+  }
+  .moon {
+    width: 80px; height: 80px;
+    background: var(--gold-light);
+    border-radius: 50%;
+    box-shadow: 0 0 40px 15px rgba(240,208,128,0.35), 0 0 80px 30px rgba(201,168,76,0.15);
+    position: relative;
+  }
+  .moon::after {
+    content: '';
+    position: absolute;
+    top: -5px; left: 14px;
+    width: 74px; height: 74px;
+    background: #0A1A10;
+    border-radius: 50%;
+  }
+
+  /* ── KAABA SCENE ── */
+  .scene {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    height: 320px;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* Ground */
+  .ground {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 80px;
+    background: linear-gradient(180deg, #3a2a12 0%, #2a1a08 100%);
+    border-top: 2px solid var(--gold-dark);
+  }
+  .ground::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(201,168,76,0.06) 40px, rgba(201,168,76,0.06) 41px);
+  }
+
+  /* Kaaba */
+  .kaaba {
+    position: absolute;
+    bottom: 78px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 130px;
+    background: #0a0a0a;
+    border: 2px solid var(--gold-dark);
+    box-shadow: 0 0 30px 8px rgba(201,168,76,0.2), inset 0 0 20px rgba(0,0,0,0.8);
+  }
+  .kaaba-band {
+    position: absolute;
+    top: 26px; left: 0; right: 0;
+    height: 28px;
+    background: var(--gold-dark);
+    border-top: 1px solid var(--gold);
+    border-bottom: 1px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Scheherazade New', serif;
+    color: var(--gold-light);
+    font-size: 9px;
+    letter-spacing: 1px;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 0 4px;
+  }
+  .kaaba-door {
+    position: absolute;
+    bottom: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 30px; height: 45px;
+    background: linear-gradient(180deg, var(--gold-dark) 0%, var(--gold) 100%);
+    border: 1px solid var(--gold-light);
+    border-bottom: none;
+    border-radius: 2px 2px 0 0;
+  }
+  .kaaba-door::after {
+    content: '';
+    position: absolute;
+    top: 4px; left: 4px; right: 4px; bottom: 0;
+    border: 1px solid rgba(240,208,128,0.4);
+    border-bottom: none;
+    border-radius: 1px 1px 0 0;
+  }
+
+  /* Minarets */
+  .minaret {
+    position: absolute;
+    bottom: 78px;
+    width: 22px;
+  }
+  .minaret.left  { left: calc(50% - 100px); }
+  .minaret.right { right: calc(50% - 100px); }
+  .minaret-body {
+    width: 100%;
+    height: 110px;
+    background: linear-gradient(180deg, var(--emerald) 0%, var(--deep-green) 100%);
+    border: 1px solid var(--gold-dark);
+    border-bottom: none;
+    position: relative;
+  }
+  .minaret-body::before {
+    content: '';
+    position: absolute;
+    top: 20px; left: 50%;
+    transform: translateX(-50%);
+    width: 14px; height: 14px;
+    border: 1px solid var(--gold-dark);
+    border-radius: 50%;
+  }
+  .minaret-body::after {
+    content: '';
+    position: absolute;
+    top: 50px; left: 50%;
+    transform: translateX(-50%);
+    width: 14px; height: 14px;
+    border: 1px solid var(--gold-dark);
+    border-radius: 50%;
+  }
+  .minaret-cap {
+    width: 0;
+    height: 0;
+    border-left: 11px solid transparent;
+    border-right: 11px solid transparent;
+    border-bottom: 28px solid var(--emerald);
+    position: relative;
+    bottom: 0;
+  }
+  .minaret-cap::after {
+    content: '';
+    position: absolute;
+    top: 6px; left: -2px;
+    width: 4px; height: 12px;
+    background: var(--gold);
+  }
+
+  /* Tawaf pilgrims ring */
+  .tawaf-ring {
+    position: absolute;
+    bottom: 78px; left: 50%;
+    transform: translateX(-50%);
+    width: 280px; height: 80px;
+    border-radius: 50%;
+    border: 1px dashed rgba(201,168,76,0.2);
+  }
+
+  .pilgrim {
+    position: absolute;
+    width: 6px; height: 14px;
+    background: #fff;
+    border-radius: 3px 3px 0 0;
+    transform-origin: center bottom;
+    animation: tawaf var(--s) linear infinite;
+  }
+  .pilgrim::after {
+    content: '';
+    position: absolute;
+    top: -5px; left: 50%;
+    transform: translateX(-50%);
+    width: 6px; height: 6px;
+    background: #f5dba0;
+    border-radius: 50%;
+  }
+
+  @keyframes tawaf {
+    from { transform: rotate(var(--start)) translateX(140px) rotate(calc(-1 * var(--start))); }
+    to   { transform: rotate(calc(var(--start) + 360deg)) translateX(140px) rotate(calc(-1 * (var(--start) + 360deg))); }
+  }
+
+  /* ── SHEEP ── */
+  .sheep {
+    position: absolute;
+    bottom: 78px;
+    animation: sheepWalk var(--sw) ease-in-out infinite alternate;
+  }
+  @keyframes sheepWalk {
+    from { transform: translateX(0); }
+    to   { transform: translateX(var(--sx)); }
+  }
+  .sheep-body {
+    position: relative;
+    width: 54px;
+    height: 34px;
+  }
+  .sheep-wool {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 30% 40%, #f0ede8, #d8d5d0);
+    border-radius: 60% 50% 50% 60% / 60% 60% 50% 50%;
+    box-shadow: inset -4px -3px 8px rgba(0,0,0,0.15);
+  }
+  .sheep-wool::before {
+    content: '';
+    position: absolute;
+    top: 2px; left: 6px; right: 6px; bottom: 2px;
+    background: radial-gradient(circle at 35% 35%, rgba(255,255,255,0.6), transparent 60%);
+    border-radius: inherit;
+  }
+  .sheep-head {
+    position: absolute;
+    right: -16px; top: 2px;
+    width: 22px; height: 20px;
+    background: linear-gradient(135deg, #8B7355, #6B5335);
+    border-radius: 50% 60% 50% 40%;
+  }
+  .sheep-head::before { /* eye */
+    content: '';
+    position: absolute;
+    top: 6px; right: 5px;
+    width: 4px; height: 4px;
+    background: #1a0a00;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.4);
+  }
+  .sheep-head::after { /* ear */
+    content: '';
+    position: absolute;
+    top: 2px; right: 14px;
+    width: 8px; height: 5px;
+    background: #a08060;
+    border-radius: 50%;
+    transform: rotate(-30deg);
+  }
+  .sheep-horns {
+    position: absolute;
+    right: -12px; top: -4px;
+    width: 12px; height: 10px;
+  }
+  .sheep-horns::before, .sheep-horns::after {
+    content: '';
+    position: absolute;
+    width: 5px; height: 10px;
+    background: var(--gold-dark);
+    border-radius: 4px 4px 0 0;
+    top: 0;
+  }
+  .sheep-horns::before { left: 0; transform: rotate(-15deg); }
+  .sheep-horns::after  { right: 0; transform: rotate(15deg); }
+  .sheep-legs {
+    position: absolute;
+    bottom: -14px; left: 8px;
+    display: flex; gap: 6px;
+  }
+  .leg {
+    width: 5px; height: 14px;
+    background: #8B7355;
+    border-radius: 0 0 3px 3px;
+    animation: legSwing 0.8s ease-in-out infinite alternate;
+  }
+  .leg:nth-child(2) { animation-delay: 0.2s; }
+  .leg:nth-child(3) { animation-delay: 0.1s; }
+  .leg:nth-child(4) { animation-delay: 0.3s; }
+  @keyframes legSwing {
+    from { transform: rotate(-8deg); }
+    to   { transform: rotate(8deg); }
+  }
+  .sheep-tail {
+    position: absolute;
+    left: 2px; top: 10px;
+    width: 10px; height: 10px;
+    background: #e8e5e0;
+    border-radius: 50%;
+    animation: tailWag 0.6s ease-in-out infinite alternate;
+    transform-origin: right center;
+  }
+  @keyframes tailWag {
+    from { transform: rotate(-20deg); }
+    to   { transform: rotate(20deg); }
+  }
+
+  /* ── PALM TREES ── */
+  .palm {
+    position: absolute;
+    bottom: 76px;
+  }
+  .palm-trunk {
+    width: 12px;
+    background: linear-gradient(90deg, #5a3a1a, #8B5E3C, #5a3a1a);
+    border-radius: 4px;
+    margin: 0 auto;
+  }
+  .palm-leaves {
+    position: relative;
+    height: 50px;
+    width: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .palm-leaf {
+    position: absolute;
+    bottom: 0; left: 50%;
+    width: 40px; height: 12px;
+    background: linear-gradient(90deg, var(--emerald-light), var(--deep-green));
+    border-radius: 0 50% 50% 0;
+    transform-origin: left center;
+  }
+
+  /* ── LANTERNS ── */
+  .lantern {
+    position: fixed;
+    top: 20px;
+    z-index: 3;
+    animation: lanternSway 4s ease-in-out infinite;
+    transform-origin: top center;
+  }
+  .lantern:nth-child(odd) { animation-direction: alternate; }
+  @keyframes lanternSway {
+    0%,100% { transform: rotate(-6deg); }
+    50%     { transform: rotate(6deg); }
+  }
+  .lantern-body {
+    width: 24px; height: 38px;
+    background: linear-gradient(180deg, rgba(201,168,76,0.9), rgba(139,105,20,0.9));
+    border-radius: 3px 3px 6px 6px;
+    border: 1px solid var(--gold);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 18px 6px rgba(255,200,50,0.5), inset 0 0 10px rgba(255,220,80,0.3);
+  }
+  .lantern-body::before {
+    content: '';
+    position: absolute;
+    top: 4px; left: 4px; right: 4px; bottom: 4px;
+    border: 1px solid rgba(255,220,80,0.3);
+    border-radius: 2px;
+  }
+  .lantern-top {
+    width: 30px; height: 8px;
+    background: var(--gold);
+    border-radius: 2px;
+    margin: 0 auto;
+    position: relative;
+    left: -3px;
+  }
+  .lantern-string {
+    width: 1px; height: 30px;
+    background: var(--gold-dark);
+    margin: 0 auto;
+  }
+  .lantern-tassel {
+    width: 3px; height: 14px;
+    background: var(--gold);
+    margin: 0 auto;
+    border-radius: 0 0 2px 2px;
+  }
+
+  /* ── DECORATIVE ARCH / BANNER ── */
+  .arch-banner {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 120px;
+    background: linear-gradient(180deg, rgba(10,46,26,0.97) 0%, transparent 100%);
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 10px;
+  }
+  .arch-inner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .arch-line {
+    height: 1px;
+    width: 120px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .arch-diamond {
+    width: 10px; height: 10px;
+    background: var(--gold);
+    transform: rotate(45deg);
+  }
+
+  /* ── GEOMETRIC BORDER PATTERN ── */
+  .geo-border-top, .geo-border-bottom {
+    position: fixed;
+    left: 0; right: 0;
+    height: 6px;
+    z-index: 10;
+    background: repeating-linear-gradient(90deg,
+      var(--gold) 0px, var(--gold) 8px,
+      var(--emerald) 8px, var(--emerald) 16px,
+      var(--gold-dark) 16px, var(--gold-dark) 24px,
+      var(--emerald) 24px, var(--emerald) 32px
+    );
+  }
+  .geo-border-top { top: 0; }
+  .geo-border-bottom { bottom: 0; }
+
+  /* ── ISLAMIC PATTERN OVERLAY ── */
+  .pattern-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cpolygon points='50,5 61,35 95,35 68,57 79,91 50,70 21,91 32,57 5,35 39,35' fill='none' stroke='%23C9A84C' stroke-width='1'/%3E%3C/svg%3E");
+    background-size: 80px 80px;
+  }
+
+  /* ── MAIN CONTENT ── */
+  .content {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 140px 20px 360px;
+    text-align: center;
+  }
+
+  /* Arabic Bismillah */
+  .bismillah {
+    font-family: 'Scheherazade New', serif;
+    font-size: clamp(28px, 5vw, 52px);
+    color: var(--gold-light);
+    text-shadow: 0 0 30px rgba(201,168,76,0.6);
+    margin-bottom: 16px;
+    animation: fadeDown 1s ease-out both;
+    direction: rtl;
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 16px 0;
+    animation: fadeDown 1.1s ease-out both;
+  }
+  .divider-line {
+    height: 1px;
+    width: 140px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .divider-star {
+    color: var(--gold);
+    font-size: 18px;
+  }
+
+  .main-title {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: clamp(28px, 6vw, 72px);
+    font-weight: 700;
+    color: var(--gold-light);
+    text-shadow: 0 0 40px rgba(201,168,76,0.5), 0 4px 20px rgba(0,0,0,0.8);
+    line-height: 1.2;
+    animation: fadeDown 1.2s ease-out both;
+    letter-spacing: 2px;
+  }
+
+  .subtitle {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: clamp(14px, 2.5vw, 24px);
+    color: var(--gold);
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    margin-top: 6px;
+    animation: fadeDown 1.3s ease-out both;
+  }
+
+  .arabic-title {
+    font-family: 'Scheherazade New', serif;
+    font-size: clamp(22px, 4vw, 48px);
+    color: var(--sand);
+    margin-top: 10px;
+    direction: rtl;
+    text-shadow: 0 0 20px rgba(232,201,122,0.4);
+    animation: fadeDown 1.4s ease-out both;
+  }
+
+  /* Card */
+  .wish-card {
+    margin-top: 36px;
+    background: linear-gradient(135deg,
+      rgba(10,46,26,0.85) 0%,
+      rgba(26,92,56,0.6) 50%,
+      rgba(10,46,26,0.85) 100%
+    );
+    border: 1px solid rgba(201,168,76,0.4);
+    border-radius: 4px;
+    padding: 36px 48px;
+    max-width: 680px;
+    position: relative;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6), inset 0 1px 0 rgba(201,168,76,0.2);
+    animation: fadeUp 1.5s ease-out both;
+  }
+  .wish-card::before, .wish-card::after {
+    content: '✦';
+    position: absolute;
+    color: var(--gold);
+    font-size: 20px;
+    line-height: 1;
+  }
+  .wish-card::before { top: 12px; left: 16px; }
+  .wish-card::after  { bottom: 12px; right: 16px; }
+
+  .corner-ornament {
+    position: absolute;
+    width: 30px; height: 30px;
+    border-color: var(--gold-dark);
+    border-style: solid;
+  }
+  .corner-ornament.tl { top: 4px; left: 4px; border-width: 1px 0 0 1px; }
+  .corner-ornament.tr { top: 4px; right: 4px; border-width: 1px 1px 0 0; }
+  .corner-ornament.bl { bottom: 4px; left: 4px; border-width: 0 0 1px 1px; }
+  .corner-ornament.br { bottom: 4px; right: 4px; border-width: 0 1px 1px 0; }
+
+  .wish-text {
+    font-family: 'Amiri', serif;
+    font-size: clamp(15px, 2vw, 20px);
+    color: var(--cream);
+    line-height: 1.9;
+    text-align: center;
+  }
+  .wish-text em {
+    color: var(--gold-light);
+    font-style: normal;
+    font-weight: 700;
+  }
+
+  .hadith {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(201,168,76,0.25);
+    font-family: 'Amiri', serif;
+    font-size: clamp(13px, 1.5vw, 16px);
+    color: rgba(240,208,128,0.7);
+    font-style: italic;
+    line-height: 1.7;
+  }
+
+  /* Signature */
+  .signature {
+    margin-top: 36px;
+    font-family: 'Scheherazade New', serif;
+    font-size: clamp(18px, 3vw, 30px);
+    color: var(--gold);
+    text-shadow: 0 0 20px rgba(201,168,76,0.4);
+    animation: fadeUp 1.8s ease-out both;
+  }
+
+  /* Floating petals / sparkles */
+  .sparkle {
+    position: fixed;
+    pointer-events: none;
+    z-index: 4;
+    animation: sparkleFall var(--sf) linear infinite;
+    opacity: 0;
+    color: var(--gold);
+    font-size: var(--ss);
+  }
+  @keyframes sparkleFall {
+    0%   { opacity: 0; transform: translateY(-20px) rotate(0deg); }
+    10%  { opacity: 0.8; }
+    90%  { opacity: 0.6; }
+    100% { opacity: 0; transform: translateY(100vh) rotate(720deg); }
+  }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SENDER BLOCK ── */
+  .sender-block {
+    margin-top: 28px;
+    text-align: center;
+    animation: fadeUp 1.9s ease-out both;
+  }
+  .sender-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .sender-line {
+    display: block;
+    height: 1px;
+    width: 80px;
+    background: linear-gradient(90deg, transparent, var(--gold-dark), transparent);
+  }
+  .sender-icon { color: var(--gold); font-size: 16px; }
+  .sender-from {
+    font-family: 'Amiri', serif;
+    font-size: 13px;
+    color: rgba(201,168,76,0.55);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .sender-name {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: clamp(20px, 3.5vw, 34px);
+    font-weight: 700;
+    color: var(--gold-light);
+    text-shadow: 0 0 30px rgba(201,168,76,0.5), 0 2px 12px rgba(0,0,0,0.6);
+    letter-spacing: 3px;
+    line-height: 1.2;
+  }
+  .sender-amp {
+    font-family: 'Scheherazade New', serif;
+    font-size: 22px;
+    color: var(--gold);
+    margin: 4px 0;
+    opacity: 0.8;
+  }
+  .sender-family {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: clamp(14px, 2.5vw, 22px);
+    color: var(--sand);
+    letter-spacing: 6px;
+  }
+  .sender-arabic {
+    font-family: 'Scheherazade New', serif;
+    font-size: clamp(14px, 2vw, 20px);
+    color: rgba(201,168,76,0.5);
+    margin-top: 8px;
+    direction: rtl;
+  }
+
+  /* ── SHARE BUTTON ── */
+  .share-btn {
+    margin-top: 32px;
+    padding: 14px 48px;
+    background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-dark));
+    border: none;
+    border-radius: 2px;
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 13px;
+    color: var(--deep-green);
+    font-weight: 700;
+    letter-spacing: 3px;
+    cursor: pointer;
+    text-transform: uppercase;
+    box-shadow: 0 4px 20px rgba(201,168,76,0.4);
+    transition: all 0.3s ease;
+    animation: fadeUp 2s ease-out both;
+    position: relative;
+    overflow: hidden;
+  }
+  .share-btn::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.5s ease;
+  }
+  .share-btn:hover::before { left: 100%; }
+  .share-btn:hover {
+    box-shadow: 0 6px 30px rgba(201,168,76,0.65);
+    transform: translateY(-2px);
+  }
+
+  /* ── HAJJ SCENE LABEL ── */
+  .scene-label {
+    position: fixed;
+    bottom: 88px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Scheherazade New', serif;
+    font-size: 11px;
+    color: rgba(201,168,76,0.45);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    z-index: 6;
+  }
+
+  /* ── HAJJ QUIZ ── */
+  .quiz-section {
+    position: relative; z-index: 5;
+    max-width: 720px; margin: 0 auto;
+    padding: 60px 20px 380px;
+  }
+  .quiz-header {
+    text-align: center; margin-bottom: 40px;
+    animation: fadeDown 1s ease-out both;
+  }
+  .quiz-header h2 {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: clamp(22px, 4vw, 42px);
+    color: var(--gold-light);
+    text-shadow: 0 0 30px rgba(201,168,76,0.5);
+    margin-bottom: 8px;
+  }
+  .quiz-header p {
+    font-family: 'Amiri', serif;
+    color: rgba(201,168,76,0.6); font-size: 15px;
+    letter-spacing: 1px;
+  }
+  .quiz-progress {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 30px;
+  }
+  .quiz-progress-bar {
+    flex: 1; height: 6px; background: rgba(201,168,76,0.15);
+    border-radius: 3px; overflow: hidden;
+  }
+  .quiz-progress-fill {
+    height: 100%; width: 0%; border-radius: 3px;
+    background: linear-gradient(90deg, var(--gold-dark), var(--gold-light));
+    transition: width 0.5s ease;
+  }
+  .quiz-progress-text {
+    font-family: 'Amiri', serif; font-size: 14px;
+    color: var(--gold); white-space: nowrap;
+  }
+  .quiz-card {
+    background: linear-gradient(135deg, rgba(10,46,26,0.9), rgba(26,92,56,0.5), rgba(10,46,26,0.9));
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 6px; padding: 32px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 16px 50px rgba(0,0,0,0.5);
+    animation: fadeUp 0.5s ease-out both;
+    position: relative;
+  }
+  .quiz-card::before, .quiz-card::after {
+    content: '✦'; position: absolute;
+    color: var(--gold); font-size: 16px; opacity: 0.5;
+  }
+  .quiz-card::before { top: 10px; left: 14px; }
+  .quiz-card::after { bottom: 10px; right: 14px; }
+  .quiz-q-num {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 12px; color: var(--gold-dark);
+    letter-spacing: 3px; text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .quiz-question {
+    font-family: 'Amiri', serif;
+    font-size: clamp(17px, 2.5vw, 22px);
+    color: var(--cream); line-height: 1.7;
+    margin-bottom: 24px;
+  }
+  .quiz-options { display: flex; flex-direction: column; gap: 12px; }
+  .quiz-option {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 18px; border-radius: 4px;
+    border: 1px solid rgba(201,168,76,0.2);
+    background: rgba(10,46,26,0.6);
+    cursor: pointer; transition: all 0.3s ease;
+    font-family: 'Amiri', serif; font-size: 16px;
+    color: var(--cream);
+  }
+  .quiz-option:hover {
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.1);
+    transform: translateX(4px);
+  }
+  .quiz-option .opt-letter {
+    width: 30px; height: 30px; border-radius: 50%;
+    border: 1px solid var(--gold-dark);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 12px; color: var(--gold);
+    flex-shrink: 0; transition: all 0.3s ease;
+  }
+  .quiz-option.correct {
+    border-color: #2ecc71; background: rgba(46,204,113,0.15);
+  }
+  .quiz-option.correct .opt-letter {
+    background: #2ecc71; color: #fff; border-color: #2ecc71;
+  }
+  .quiz-option.wrong {
+    border-color: #e74c3c; background: rgba(231,76,60,0.15);
+  }
+  .quiz-option.wrong .opt-letter {
+    background: #e74c3c; color: #fff; border-color: #e74c3c;
+  }
+  .quiz-option.disabled { pointer-events: none; opacity: 0.6; }
+  .quiz-explanation {
+    margin-top: 18px; padding: 16px;
+    background: rgba(201,168,76,0.08);
+    border-left: 3px solid var(--gold-dark);
+    border-radius: 0 4px 4px 0;
+    font-family: 'Amiri', serif; font-size: 15px;
+    color: rgba(240,208,128,0.8); line-height: 1.6;
+    animation: fadeUp 0.3s ease-out both;
+  }
+  .quiz-next-btn {
+    margin-top: 24px; padding: 12px 40px;
+    background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+    border: none; border-radius: 3px;
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 12px; color: var(--deep-green);
+    font-weight: 700; letter-spacing: 2px;
+    cursor: pointer; text-transform: uppercase;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(201,168,76,0.3);
+  }
+  .quiz-next-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(201,168,76,0.5);
+  }
+  /* Results */
+  .quiz-results {
+    text-align: center; animation: fadeUp 0.5s ease-out both;
+  }
+  .quiz-results .score-circle {
+    width: 140px; height: 140px; margin: 0 auto 24px;
+    border-radius: 50%; display: flex; align-items: center;
+    justify-content: center; flex-direction: column;
+    border: 3px solid var(--gold);
+    background: rgba(10,46,26,0.8);
+    box-shadow: 0 0 40px rgba(201,168,76,0.3);
+  }
+  .score-circle .score-num {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 36px; color: var(--gold-light);
+  }
+  .score-circle .score-total {
+    font-family: 'Amiri', serif; font-size: 14px;
+    color: var(--gold); opacity: 0.7;
+  }
+  .quiz-results h3 {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: clamp(18px, 3vw, 28px);
+    color: var(--gold-light); margin-bottom: 12px;
+  }
+  .quiz-results p {
+    font-family: 'Amiri', serif; font-size: 16px;
+    color: var(--cream); line-height: 1.7; margin-bottom: 24px;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .wish-card { padding: 24px 20px; }
+    .lantern { display: none; }
+    .tawaf-ring { width: 200px; }
+    .quiz-card { padding: 20px 16px; }
+    .quiz-option { padding: 12px 14px; font-size: 15px; }
+    .content { padding: 140px 16px 80px; }
+    .quiz-section { padding: 40px 16px 380px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Geometric borders -->
+<div class="geo-border-top"></div>
+<div class="geo-border-bottom"></div>
+
+<!-- Pattern bg -->
+<div class="pattern-bg"></div>
+
+<!-- Sky & Stars -->
+<div id="sky"></div>
+
+<!-- Moon -->
+<div class="moon-wrap">
+  <div class="lantern-string" style="height:0"></div>
+  <div class="moon"></div>
+</div>
+
+<!-- Lanterns -->
+<div class="lantern" style="left:5%">
+  <div class="lantern-string"></div>
+  <div class="lantern-top"></div>
+  <div class="lantern-body"></div>
+  <div class="lantern-tassel"></div>
+</div>
+<div class="lantern" style="left:18%; top:10px; animation-delay:.5s">
+  <div class="lantern-string" style="height:50px"></div>
+  <div class="lantern-top"></div>
+  <div class="lantern-body"></div>
+  <div class="lantern-tassel"></div>
+</div>
+<div class="lantern" style="right:6%; animation-delay:.3s">
+  <div class="lantern-string"></div>
+  <div class="lantern-top"></div>
+  <div class="lantern-body"></div>
+  <div class="lantern-tassel"></div>
+</div>
+<div class="lantern" style="right:20%; top:8px; animation-delay:.8s">
+  <div class="lantern-string" style="height:45px"></div>
+  <div class="lantern-top"></div>
+  <div class="lantern-body"></div>
+  <div class="lantern-tassel"></div>
+</div>
+
+<!-- Arch banner -->
+<div class="arch-banner">
+  <div class="arch-inner">
+    <div class="arch-line"></div>
+    <div class="arch-diamond"></div>
+    <div class="arch-line" style="width:60px"></div>
+    <div class="arch-diamond"></div>
+    <div class="arch-line"></div>
+  </div>
+</div>
+
+<!-- Main content -->
+<div class="content">
+  <div class="bismillah">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</div>
+
+  <div class="divider">
+    <div class="divider-line"></div>
+    <span class="divider-star">☽</span>
+    <div class="divider-line"></div>
+  </div>
+
+  <h1 class="main-title">Eid ul Adha<br>Mubarak</h1>
+  <div class="subtitle">Bakrid &nbsp;·&nbsp; 1446 H</div>
+  <div class="arabic-title">عيد الأضحى مبارك</div>
+
+  <div class="wish-card">
+    <div class="corner-ornament tl"></div>
+    <div class="corner-ornament tr"></div>
+    <div class="corner-ornament bl"></div>
+    <div class="corner-ornament br"></div>
+
+    <p class="wish-text">
+      May the divine blessings of <em>Allah</em> fill your heart with joy,<br>
+      bring peace to your home, and<br>
+      accept the <em>Qurbani</em> and <em>Hajj</em> of all pilgrims.<br><br>
+      May this blessed day of sacrifice remind us<br>
+      of <em>Ibrahim's (AS)</em> devotion and obedience,<br>
+      and may Allah's infinite mercy surround<br>
+      you and your loved ones always.
+    </p>
+
+    <div class="hadith">
+      ❝ The best of days in this world is the Day of Nahr (Sacrifice). ❞<br>
+      <span style="font-size:0.85em; color:rgba(201,168,76,0.5)">— Prophet Muhammad ﷺ (Abu Dawud)</span>
+    </div>
+  </div>
+
+  <div class="signature">تَقَبَّلَ اللَّهُ مِنَّا وَمِنْكُمْ</div>
+  <div style="color:rgba(201,168,76,0.55); font-size:13px; margin-top:6px; font-family:'Amiri',serif; letter-spacing:2px">
+    Taqabbal Allahu minna wa minkum
+  </div>
+
+  <!-- Sender -->
+  <div class="sender-block">
+    <div class="sender-divider">
+      <span class="sender-line"></span>
+      <span class="sender-icon">☽</span>
+      <span class="sender-line"></span>
+    </div>
+    <div class="sender-from">With warm wishes &amp; prayers from</div>
+    <div class="sender-name">Mohammed Rehan</div>
+    <div class="sender-amp">&amp;</div>
+    <div class="sender-family">Family</div>
+    <div class="sender-arabic">مُحَمَّد رِيهَان وَعَائِلَتُه</div>
+  </div>
+
+  <button class="share-btn" onclick="shareGreeting()">✦ Share Wishes ✦</button>
+</div>
+
+<!-- ── HAJJ QUIZ SECTION ── -->
+<div class="quiz-section" id="quizSection">
+  <div class="quiz-header">
+    <div class="divider" style="margin-bottom:20px">
+      <div class="divider-line"></div>
+      <span class="divider-star">☽</span>
+      <div class="divider-line"></div>
+    </div>
+    <h2>✦ Hajj Knowledge Quiz ✦</h2>
+    <p>Test your knowledge about the sacred pilgrimage</p>
+  </div>
+  <div class="quiz-progress">
+    <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="progressFill"></div></div>
+    <div class="quiz-progress-text" id="progressText">1 / 10</div>
+  </div>
+  <div id="quizContainer"></div>
+</div>
+
+<!-- Hajj Scene -->
+<div class="scene">
+  <!-- Left Palm -->
+  <div class="palm" style="left:6%">
+    <div class="palm-leaves">
+      <div class="palm-leaf" style="transform:rotate(-50deg)"></div>
+      <div class="palm-leaf" style="transform:rotate(-20deg); background:linear-gradient(90deg,#1a6b3a,#0a2e1a)"></div>
+      <div class="palm-leaf" style="transform:rotate(10deg)"></div>
+      <div class="palm-leaf" style="transform:rotate(40deg); background:linear-gradient(90deg,#1a6b3a,#0a2e1a)"></div>
+      <div class="palm-leaf" style="transform:rotate(65deg)"></div>
+    </div>
+    <div class="palm-trunk" style="height:70px"></div>
+  </div>
+  <!-- Right Palm -->
+  <div class="palm" style="right:7%">
+    <div class="palm-leaves">
+      <div class="palm-leaf" style="transform:rotate(-60deg)"></div>
+      <div class="palm-leaf" style="transform:rotate(-25deg); background:linear-gradient(90deg,#1a6b3a,#0a2e1a)"></div>
+      <div class="palm-leaf" style="transform:rotate(5deg)"></div>
+      <div class="palm-leaf" style="transform:rotate(35deg); background:linear-gradient(90deg,#1a6b3a,#0a2e1a)"></div>
+    </div>
+    <div class="palm-trunk" style="height:60px"></div>
+  </div>
+  <!-- Minarets -->
+  <div class="minaret left">
+    <div class="minaret-cap"></div>
+    <div class="minaret-body"></div>
+  </div>
+  <div class="minaret right">
+    <div class="minaret-cap"></div>
+    <div class="minaret-body"></div>
+  </div>
+  <!-- Kaaba -->
+  <div class="kaaba">
+    <div class="kaaba-band">لَا إِلٰهَ إِلَّا الله مُحَمَّدٌ رَّسُولُ الله</div>
+    <div class="kaaba-door"></div>
+  </div>
+  <!-- Tawaf ring -->
+  <div class="tawaf-ring"></div>
+  <!-- Ground -->
+  <div class="ground"></div>
+  <!-- Sheep 1 -->
+  <div class="sheep" style="left:12%; --sw:3s; --sx:30px;">
+    <div class="sheep-body">
+      <div class="sheep-tail"></div>
+      <div class="sheep-wool"></div>
+      <div class="sheep-horns"></div>
+      <div class="sheep-head"></div>
+      <div class="sheep-legs"><div class="leg"></div><div class="leg"></div><div class="leg"></div><div class="leg"></div></div>
+    </div>
+  </div>
+  <!-- Sheep 2 -->
+  <div class="sheep" style="right:14%; --sw:4s; --sx:-25px; transform:scaleX(-1)">
+    <div class="sheep-body">
+      <div class="sheep-tail"></div>
+      <div class="sheep-wool"></div>
+      <div class="sheep-horns"></div>
+      <div class="sheep-head"></div>
+      <div class="sheep-legs"><div class="leg" style="animation-delay:0.15s"></div><div class="leg" style="animation-delay:0.35s"></div><div class="leg" style="animation-delay:0.05s"></div><div class="leg" style="animation-delay:0.25s"></div></div>
+    </div>
+  </div>
+  <!-- Sheep 3 -->
+  <div class="sheep" style="left:28%; --sw:5s; --sx:20px; transform:scale(0.75)">
+    <div class="sheep-body">
+      <div class="sheep-tail"></div>
+      <div class="sheep-wool"></div>
+      <div class="sheep-horns"></div>
+      <div class="sheep-head"></div>
+      <div class="sheep-legs"><div class="leg" style="animation-delay:0.4s"></div><div class="leg" style="animation-delay:0.1s"></div><div class="leg" style="animation-delay:0.3s"></div><div class="leg" style="animation-delay:0.2s"></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="scene-label">✦ Masjid al-Haram · Makkah al-Mukarramah ✦</div>
+
+<script>
+  // ── STARS ──
+  const sky = document.getElementById('sky');
+  for (let i = 0; i < 200; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const size = Math.random() * 2.5 + 0.5;
+    s.style.cssText = `width:${size}px;height:${size}px;top:${Math.random()*75}%;left:${Math.random()*100}%;--op:${Math.random()*0.8+0.2};--d:${Math.random()*3+1.5}s;animation-delay:${Math.random()*4}s;`;
+    sky.appendChild(s);
+  }
+
+  // ── TAWAF PILGRIMS ──
+  const ring = document.querySelector('.tawaf-ring');
+  for (let i = 0; i < 16; i++) {
+    const p = document.createElement('div');
+    p.className = 'pilgrim';
+    const startDeg = (i / 16) * 360;
+    p.style.cssText = `--start:${startDeg}deg;--s:${8+Math.random()*4}s;bottom:0;left:50%;margin-left:-3px;`;
+    ring.appendChild(p);
+  }
+
+  // ── SPARKLES ──
+  const sparkleSymbols = ['✦','✧','❋','✿','❀','☽','★'];
+  for (let i = 0; i < 18; i++) {
+    const sp = document.createElement('div');
+    sp.className = 'sparkle';
+    sp.textContent = sparkleSymbols[Math.floor(Math.random() * sparkleSymbols.length)];
+    sp.style.cssText = `left:${Math.random()*100}%;top:-20px;--sf:${6+Math.random()*10}s;--ss:${10+Math.random()*14}px;animation-delay:${Math.random()*10}s;`;
+    document.body.appendChild(sp);
+  }
+
+  // ── SHARE ──
+  async function shareGreeting() {
+    const text = 'عيد الأضحى مبارك\nEid ul Adha Mubarak! 🌙\nMay Allah accept our prayers and sacrifices. Taqabbal Allahu minna wa minkum ✨\n— With warm wishes from Mohammed Rehan & Family';
+    if (navigator.share) {
+      try { await navigator.share({ title: 'Eid ul Adha Mubarak', text }); } catch(e) {}
+    } else {
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.querySelector('.share-btn');
+        const orig = btn.textContent;
+        btn.textContent = '✓ Copied to Clipboard!';
+        setTimeout(() => btn.textContent = orig, 2500);
+      });
+    }
+  }
+
+  // ── INTERACTIVE GOLD GLOW ──
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('.quiz-option') || e.target.closest('.quiz-next-btn') || e.target.closest('.share-btn')) return;
+    const burst = document.createElement('div');
+    burst.style.cssText = `position:fixed;pointer-events:none;z-index:99;left:${e.clientX}px;top:${e.clientY}px;width:60px;height:60px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,0.7) 0%,transparent 70%);transform:translate(-50%,-50%) scale(0);animation:burst 0.6s ease-out forwards;`;
+    document.body.appendChild(burst);
+    if (!document.querySelector('#burstKF')) {
+      const style = document.createElement('style');
+      style.id = 'burstKF';
+      style.textContent = '@keyframes burst{to{transform:translate(-50%,-50%) scale(3);opacity:0}}';
+      document.head.appendChild(style);
+    }
+    setTimeout(() => burst.remove(), 700);
+  });
+
+  // ── HAJJ QUIZ ──
+  const quizData = [
+    {
+      q: "What is Hajj?",
+      options: ["A daily prayer ritual", "The annual Islamic pilgrimage to Makkah", "A month of fasting", "A charity obligation"],
+      answer: 1,
+      explanation: "Hajj is the annual Islamic pilgrimage to Makkah, Saudi Arabia. It is one of the five pillars of Islam and is obligatory for every able-bodied Muslim who can afford it, at least once in their lifetime."
+    },
+    {
+      q: "In which Islamic month is Hajj performed?",
+      options: ["Ramadan", "Muharram", "Dhul Hijjah", "Shawwal"],
+      answer: 2,
+      explanation: "Hajj is performed during the month of Dhul Hijjah, the 12th and final month of the Islamic lunar calendar. The main rituals take place from the 8th to the 12th of Dhul Hijjah."
+    },
+    {
+      q: "What is 'Ihram' in the context of Hajj?",
+      options: ["A type of prayer", "The sacred state and clothing worn by pilgrims", "The name of a mosque", "A ritual sacrifice"],
+      answer: 1,
+      explanation: "Ihram refers to both the sacred state a pilgrim enters and the special white garments worn. For men, it consists of two unstitched white cloths. Women wear modest clothing. Entering Ihram signifies purity and equality before Allah."
+    },
+    {
+      q: "How many times do pilgrims circle (Tawaf) the Kaaba?",
+      options: ["3 times", "5 times", "7 times", "10 times"],
+      answer: 2,
+      explanation: "Pilgrims perform Tawaf by circling the Kaaba seven times in a counter-clockwise direction. This ritual symbolizes the unity of believers in the worship of the One God."
+    },
+    {
+      q: "What is 'Sa'i' during Hajj?",
+      options: ["Throwing stones at pillars", "Walking between the hills of Safa and Marwah", "Standing at the plain of Arafat", "Shaving the head"],
+      answer: 1,
+      explanation: "Sa'i is the ritual of walking seven times between the hills of Safa and Marwah. It commemorates Hajar's (AS) desperate search for water for her son Ismail (AS), before the miraculous spring of Zamzam appeared."
+    },
+    {
+      q: "What is the significance of the Day of Arafah (9th Dhul Hijjah)?",
+      options: ["It is when pilgrims throw stones", "It is the day of sacrifice", "It is the most important day of Hajj — pilgrims stand in prayer at Arafat", "It is when Tawaf is performed"],
+      answer: 2,
+      explanation: "The Day of Arafah is considered the most important day of Hajj. Pilgrims gather at the plain of Arafat from noon to sunset, standing in prayer and supplication. The Prophet ﷺ said: 'Hajj is Arafah.'"
+    },
+    {
+      q: "What does 'Qurbani' (sacrifice) during Eid ul Adha commemorate?",
+      options: ["The migration to Madinah", "Prophet Ibrahim's (AS) willingness to sacrifice his son Ismail (AS)", "The conquest of Makkah", "The revelation of the Quran"],
+      answer: 1,
+      explanation: "Qurbani commemorates Prophet Ibrahim's (AS) ultimate act of obedience to Allah — his willingness to sacrifice his beloved son Ismail (AS). Allah, pleased with his devotion, replaced Ismail with a ram."
+    },
+    {
+      q: "What is the Jamarat ritual?",
+      options: ["Drinking from the Zamzam well", "Throwing pebbles at three stone pillars", "Praying at the Station of Ibrahim", "Running between Safa and Marwah"],
+      answer: 1,
+      explanation: "The Jamarat ritual involves throwing pebbles at three stone pillars (Jamarat) in Mina. This act symbolizes Prophet Ibrahim's (AS) rejection of Shaytan's temptation when he tried to dissuade Ibrahim from obeying Allah's command."
+    },
+    {
+      q: "Which prophets are believed to have built the Kaaba?",
+      options: ["Prophet Musa (AS) and Prophet Isa (AS)", "Prophet Ibrahim (AS) and Prophet Ismail (AS)", "Prophet Nuh (AS) and Prophet Dawud (AS)", "Prophet Muhammad ﷺ and Prophet Ibrahim (AS)"],
+      answer: 1,
+      explanation: "According to Islamic tradition, Prophet Ibrahim (AS) and his son Prophet Ismail (AS) built (or rebuilt) the Kaaba as the first house of worship dedicated to the One God, as mentioned in Surah Al-Baqarah (2:127)."
+    },
+    {
+      q: "What is Zamzam water?",
+      options: ["Water from the Nile river", "A sacred spring in Makkah that miraculously appeared for Hajar and Ismail (AS)", "Rainwater collected at Arafat", "Water from a well in Madinah"],
+      answer: 1,
+      explanation: "Zamzam is a sacred spring located within Masjid al-Haram in Makkah. It miraculously appeared by Allah's command when Hajar (AS) was desperately searching for water for her infant son Ismail (AS). It has been flowing for thousands of years."
+    }
+  ];
+
+  let currentQ = 0, score = 0;
+  const container = document.getElementById('quizContainer');
+  const progressFill = document.getElementById('progressFill');
+  const progressText = document.getElementById('progressText');
+
+  function renderQuestion() {
+    const q = quizData[currentQ];
+    const letters = ['A','B','C','D'];
+    progressFill.style.width = ((currentQ) / quizData.length * 100) + '%';
+    progressText.textContent = `${currentQ + 1} / ${quizData.length}`;
+    container.innerHTML = `
+      <div class="quiz-card">
+        <div class="quiz-q-num">Question ${currentQ + 1}</div>
+        <div class="quiz-question">${q.q}</div>
+        <div class="quiz-options">
+          ${q.options.map((opt, i) => `
+            <div class="quiz-option" data-idx="${i}" onclick="checkAnswer(${i})">
+              <span class="opt-letter">${letters[i]}</span>
+              <span>${opt}</span>
+            </div>
+          `).join('')}
+        </div>
+        <div id="feedbackArea"></div>
+      </div>`;
+  }
+
+  function checkAnswer(idx) {
+    const q = quizData[currentQ];
+    const options = document.querySelectorAll('.quiz-option');
+    options.forEach(o => o.classList.add('disabled'));
+    if (idx === q.answer) {
+      options[idx].classList.add('correct');
+      score++;
+    } else {
+      options[idx].classList.add('wrong');
+      options[q.answer].classList.add('correct');
+    }
+    const fb = document.getElementById('feedbackArea');
+    const isLast = currentQ >= quizData.length - 1;
+    fb.innerHTML = `
+      <div class="quiz-explanation">💡 ${q.explanation}</div>
+      <button class="quiz-next-btn" onclick="${isLast ? 'showResults()' : 'nextQuestion()'}">
+        ${isLast ? '✦ View Results ✦' : 'Next Question →'}
+      </button>`;
+  }
+
+  function nextQuestion() {
+    currentQ++;
+    renderQuestion();
+  }
+
+  function showResults() {
+    progressFill.style.width = '100%';
+    progressText.textContent = 'Done!';
+    let msg, emoji;
+    const pct = score / quizData.length;
+    if (pct === 1) { msg = 'MashaAllah! Perfect Score!'; emoji = '🏆'; }
+    else if (pct >= 0.7) { msg = 'Excellent Knowledge!'; emoji = '🌟'; }
+    else if (pct >= 0.5) { msg = 'Good Effort!'; emoji = '📖'; }
+    else { msg = 'Keep Learning!'; emoji = '💪'; }
+    container.innerHTML = `
+      <div class="quiz-card">
+        <div class="quiz-results">
+          <div class="score-circle">
+            <div class="score-num">${score}</div>
+            <div class="score-total">out of ${quizData.length}</div>
+          </div>
+          <h3>${emoji} ${msg}</h3>
+          <p>You answered ${score} out of ${quizData.length} questions correctly about the sacred pilgrimage of Hajj.
+          May Allah grant us all the opportunity to perform Hajj. Ameen!</p>
+          <button class="quiz-next-btn" onclick="restartQuiz()">✦ Try Again ✦</button>
+        </div>
+      </div>`;
+  }
+
+  function restartQuiz() {
+    currentQ = 0; score = 0;
+    renderQuestion();
+  }
+
+  renderQuestion();
+</script>
+</body>
+</html>
