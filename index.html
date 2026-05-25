@@ -907,9 +907,113 @@
     .content { padding: 140px 16px 80px; }
     .quiz-section { padding: 40px 16px 380px; }
   }
+
+  /* ── AUDIO WIDGET ── */
+  .audio-widget {
+    position: fixed;
+    bottom: 95px;
+    right: 25px;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(10, 46, 26, 0.85);
+    border: 1px solid var(--gold);
+    padding: 6px 12px 6px 8px;
+    border-radius: 30px;
+    box-shadow: 0 4px 20px rgba(201,168,76,0.35);
+    backdrop-filter: blur(8px);
+    transition: all 0.3s ease;
+    animation: fadeUp 2s ease-out both;
+  }
+  .audio-widget:hover {
+    box-shadow: 0 6px 25px rgba(201,168,76,0.55);
+    transform: translateY(-2px);
+  }
+  .audio-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-dark));
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--deep-green);
+    box-shadow: 0 2px 10px rgba(201,168,76,0.4);
+    transition: all 0.2s ease;
+  }
+  .audio-btn:active {
+    transform: scale(0.95);
+  }
+  .audio-btn svg {
+    display: block;
+    width: 16px;
+    height: 16px;
+  }
+  .audio-wave {
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+    height: 14px;
+    width: 20px;
+  }
+  .audio-bar {
+    width: 2px;
+    height: 3px;
+    background-color: var(--gold-light);
+    border-radius: 1px;
+    transition: height 0.2s ease;
+  }
+  .audio-widget.playing .audio-bar {
+    animation: soundWave 1.2s ease-in-out infinite alternate;
+  }
+  .audio-widget.playing .audio-bar:nth-child(1) { animation-delay: 0.1s; --h: 12px; }
+  .audio-widget.playing .audio-bar:nth-child(2) { animation-delay: 0.3s; --h: 8px; }
+  .audio-widget.playing .audio-bar:nth-child(3) { animation-delay: 0.0s; --h: 14px; }
+  .audio-widget.playing .audio-bar:nth-child(4) { animation-delay: 0.4s; --h: 10px; }
+  .audio-widget.playing .audio-bar:nth-child(5) { animation-delay: 0.2s; --h: 6px; }
+
+  @keyframes soundWave {
+    0% { height: 3px; }
+    100% { height: var(--h); }
+  }
+
+  .audio-text {
+    font-family: 'Amiri', serif;
+    font-size: 13px;
+    color: var(--gold-light);
+    pointer-events: none;
+    user-select: none;
+    letter-spacing: 1px;
+  }
 </style>
 </head>
 <body>
+
+<!-- Audio files -->
+<audio id="bgAudio" loop preload="auto">
+  <source src="https://archive.org/download/complete-takbeer-eid/Complete-Takbeer-Eid.mp3" type="audio/mp3">
+  <source src="https://archive.org/download/eid_takbeer/takbeer.mp3" type="audio/mp3">
+</audio>
+
+<!-- Audio floating widget -->
+<div class="audio-widget" id="audioWidget">
+  <button class="audio-btn" id="audioBtn" onclick="toggleAudio(event)" aria-label="Toggle Background Music">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M8 5v14l11-7z"/>
+    </svg>
+  </button>
+  <div class="audio-wave">
+    <div class="audio-bar"></div>
+    <div class="audio-bar"></div>
+    <div class="audio-bar"></div>
+    <div class="audio-bar"></div>
+    <div class="audio-bar"></div>
+  </div>
+  <span class="audio-text">Takbeerat</span>
+</div>
 
 <!-- Geometric borders -->
 <div class="geo-border-top"></div>
@@ -1321,6 +1425,76 @@
   }
 
   renderQuestion();
+
+  // ── AUDIO SYSTEM ──
+  const audioWidget = document.getElementById('audioWidget');
+  const audioBtn = document.getElementById('audioBtn');
+  const bgAudio = document.getElementById('bgAudio');
+  let isPlaying = false;
+
+  function updateAudioUI() {
+    if (isPlaying) {
+      audioWidget.classList.add('playing');
+      audioBtn.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+        </svg>
+      `; // Pause icon
+    } else {
+      audioWidget.classList.remove('playing');
+      audioBtn.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M8 5v14l11-7z"/>
+        </svg>
+      `; // Play icon
+    }
+  }
+
+  function toggleAudio(e) {
+    if (e) e.stopPropagation();
+    if (isPlaying) {
+      bgAudio.pause();
+      isPlaying = false;
+      updateAudioUI();
+    } else {
+      bgAudio.play().then(() => {
+        isPlaying = true;
+        updateAudioUI();
+      }).catch(err => {
+        console.log("Audio play blocked:", err);
+      });
+    }
+  }
+
+  // Attempt autoplay on load and setup fallback interaction listeners
+  window.addEventListener('DOMContentLoaded', () => {
+    bgAudio.volume = 0.4;
+    
+    const playAttempt = bgAudio.play();
+    if (playAttempt !== undefined) {
+      playAttempt.then(() => {
+        isPlaying = true;
+        updateAudioUI();
+      }).catch(error => {
+        console.log("Autoplay blocked. Registering interaction listeners.");
+        
+        const startOnInteraction = () => {
+          if (!isPlaying) {
+            bgAudio.play().then(() => {
+              isPlaying = true;
+              updateAudioUI();
+            }).catch(e => console.log(e));
+          }
+          // Remove listener once interaction is captured
+          document.removeEventListener('click', startOnInteraction);
+          document.removeEventListener('touchstart', startOnInteraction);
+        };
+        
+        document.addEventListener('click', startOnInteraction);
+        document.addEventListener('touchstart', startOnInteraction);
+      });
+    }
+  });
 </script>
 </body>
 </html>
